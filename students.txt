@@ -1,0 +1,5 @@
+STU001,Sokha Chan,88.50
+STU002,Dara Heng,94.00
+STU003,Bopha Pich,45.00
+STU004,Visal Keo,76.50
+STU005,Chenda Srun,62.00
