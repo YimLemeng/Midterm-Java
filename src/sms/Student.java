@@ -32,21 +32,21 @@ public class Student extends Person {
 
     /**
      * Converts numeric score to letter grade
+     * Grading: A (90-100), B (80-89), C (70-79), D (60-69), F (< 60)
      */
     public String getLetterGrade() {
         if (grade >= 90.0) return "A";
         if (grade >= 80.0) return "B";
         if (grade >= 70.0) return "C";
         if (grade >= 60.0) return "D";
-        if (grade >= 50.0) return "E";
         return "F";
     }
 
     /**
-     * Determines passing status (Passing grade >= 50.0)
+     * Determines passing status (Passing grade >= 60.0, Failed < 60.0)
      */
     public String getStatus() {
-        return (grade >= 50.0) ? "PASS" : "FAIL";
+        return (grade >= 60.0) ? "PASS" : "FAIL";
     }
 
     // Polymorphism: concrete implementation of abstract method from Person

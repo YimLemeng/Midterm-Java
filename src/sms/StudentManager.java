@@ -231,7 +231,7 @@ public class StudentManager implements Manageable<Student> {
             total += g;
             if (g > highest.getGrade()) highest = s;
             if (g < lowest.getGrade()) lowest = s;
-            if (g >= 50.0) passCount++;
+            if (g >= 60.0) passCount++;
         }
 
         int count = students.size();
@@ -249,8 +249,8 @@ public class StudentManager implements Manageable<Student> {
         System.out.printf("  Lowest Grade        : %.2f (%s - %s)\n",
                 lowest.getGrade(), lowest.getName(), lowest.getId());
         System.out.println("-".repeat(50));
-        System.out.printf("  Passed (>= 50)      : %d students (%.1f%%)\n", passCount, passRate);
-        System.out.printf("  Failed (< 50)       : %d students (%.1f%%)\n", failCount, 100.0 - passRate);
+        System.out.printf("  Passed (>= 60)      : %d students (%.1f%%)\n", passCount, passRate);
+        System.out.printf("  Failed (< 60)       : %d students (%.1f%%)\n", failCount, 100.0 - passRate);
         System.out.println("=".repeat(50));
     }
 
