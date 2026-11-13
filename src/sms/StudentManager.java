@@ -188,32 +188,32 @@ public class StudentManager implements Manageable<Student> {
      * Displays a given list of students as a table.
      */
     public void displayTable(List<Student> list, String title) {
-        System.out.println("\n" + "=".repeat(62));
-        System.out.printf("  %-56s\n", title + " (" + list.size() + " total)");
-        System.out.println("=".repeat(62));
+        System.out.println("\n" + "=".repeat(65));
+        System.out.printf("  %-59s\n", title + " (" + list.size() + " total)");
+        System.out.println("=".repeat(65));
 
         if (list.isEmpty()) {
             System.out.println("  No student records found.");
-            System.out.println("=".repeat(62));
+            System.out.println("=".repeat(65));
             return;
         }
 
-        System.out.printf("| %-10s | %-22s | %-7s | %-6s | %-6s |\n",
+        System.out.printf("| %-10s | %-22s | %-7s | %-6s | %-9s |\n",
                 "ID", "STUDENT NAME", "GRADE", "LETTER", "STATUS");
         System.out.println("|" + "-".repeat(12) + "|" + "-".repeat(24) + "|"
-                + "-".repeat(9) + "|" + "-".repeat(8) + "|" + "-".repeat(8) + "|");
+                + "-".repeat(9) + "|" + "-".repeat(8) + "|" + "-".repeat(11) + "|");
 
         for (Student student : list) {
             student.displayInfo();
         }
-        System.out.println("=".repeat(62));
+        System.out.println("=".repeat(65));
     }
 
     /**
      * Computes and displays class statistics:
      * - Average score
      * - Highest & Lowest grade
-     * - Pass/Fail count and Passing percentage
+     * - Pass, Re-Exam, and Re-Study headcounts & percentages
      */
     public void displayClassStatistics() {
         if (students.isEmpty()) {
@@ -225,33 +225,43 @@ public class StudentManager implements Manageable<Student> {
         Student highest = students.get(0);
         Student lowest = students.get(0);
         int passCount = 0;
+        int reExamCount = 0;
+        int reStudyCount = 0;
 
         for (Student s : students) {
             double g = s.getGrade();
             total += g;
             if (g > highest.getGrade()) highest = s;
             if (g < lowest.getGrade()) lowest = s;
-            if (g >= 60.0) passCount++;
+            if (g >= 60.0) {
+                passCount++;
+            } else if (g >= 20.0) {
+                reExamCount++;
+            } else {
+                reStudyCount++;
+            }
         }
 
         int count = students.size();
         double average = total / count;
-        int failCount = count - passCount;
         double passRate = ((double) passCount / count) * 100.0;
+        double reExamRate = ((double) reExamCount / count) * 100.0;
+        double reStudyRate = ((double) reStudyCount / count) * 100.0;
 
-        System.out.println("\n" + "=".repeat(50));
+        System.out.println("\n" + "=".repeat(52));
         System.out.println("            CLASS PERFORMANCE STATISTICS          ");
-        System.out.println("=".repeat(50));
-        System.out.printf("  Total Students      : %d\n", count);
-        System.out.printf("  Class Average Grade : %.2f\n", average);
-        System.out.printf("  Highest Grade       : %.2f (%s - %s)\n",
+        System.out.println("=".repeat(52));
+        System.out.printf("  Total Students        : %d\n", count);
+        System.out.printf("  Class Average Grade   : %.2f\n", average);
+        System.out.printf("  Highest Grade         : %.2f (%s - %s)\n",
                 highest.getGrade(), highest.getName(), highest.getId());
-        System.out.printf("  Lowest Grade        : %.2f (%s - %s)\n",
+        System.out.printf("  Lowest Grade          : %.2f (%s - %s)\n",
                 lowest.getGrade(), lowest.getName(), lowest.getId());
-        System.out.println("-".repeat(50));
-        System.out.printf("  Passed (>= 60)      : %d students (%.1f%%)\n", passCount, passRate);
-        System.out.printf("  Failed (< 60)       : %d students (%.1f%%)\n", failCount, 100.0 - passRate);
-        System.out.println("=".repeat(50));
+        System.out.println("-".repeat(52));
+        System.out.printf("  Pass (>= 60)          : %d students (%.1f%%)\n", passCount, passRate);
+        System.out.printf("  Re-Exam (20.0 - 59.9) : %d students (%.1f%%)\n", reExamCount, reExamRate);
+        System.out.printf("  Re-Study (< 20.0)     : %d students (%.1f%%)\n", reStudyCount, reStudyRate);
+        System.out.println("=".repeat(52));
     }
 
     // ==========================================

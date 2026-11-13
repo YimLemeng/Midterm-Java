@@ -13,7 +13,7 @@ The **Student Management System (SMS)** is an academic console-based Java applic
 
 ### Core Features (Topic 2 Requirements)
 * **Add New Student**: Register a new student with unique ID, full name, and grade score.
-* **View All Students**: Display all students in a neatly formatted, aligned table including numerical grade, letter grade (`A`–`F`), and status (`PASS`/`FAIL`).
+* **View All Students**: Display all students in a neatly formatted, aligned table including numerical grade, letter grade (`A`–`F`), and status (`PASS` / `RE-EXAM` / `RE-STUDY`).
 * **Update Student Grade**: Modify grade scores with range validation (`0.0` – `100.0`).
 * **Delete Student Record**: Remove student records with confirmation prompts.
 
@@ -30,7 +30,7 @@ The **Student Management System (SMS)** is an academic console-based Java applic
   * Total student count.
   * Class average grade score.
   * Highest and lowest performing student identification.
-  * Pass and fail headcounts with percentage breakdown.
+  * Pass (`>= 60`), Re-Exam (`20`–`59.9`), and Re-Study (`< 20`) breakdown with percentages.
 * **File Persistence**:
   * Auto-loads records from `students.txt` on startup.
   * Preloads sample data if no file is present.

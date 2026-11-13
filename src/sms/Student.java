@@ -32,21 +32,31 @@ public class Student extends Person {
 
     /**
      * Converts numeric score to letter grade
-     * Grading: A (90-100), B (80-89), C (70-79), D (60-69), F (< 60)
+     * Grading: A (90-100), B (80-89), C (70-79), D (60-69), E (20-59), F (< 20)
      */
     public String getLetterGrade() {
         if (grade >= 90.0) return "A";
         if (grade >= 80.0) return "B";
         if (grade >= 70.0) return "C";
         if (grade >= 60.0) return "D";
+        if (grade >= 20.0) return "E";
         return "F";
     }
 
     /**
-     * Determines passing status (Passing grade >= 60.0, Failed < 60.0)
+     * Determines academic status:
+     * - Grade >= 60.0: PASS
+     * - Grade >= 20.0 and < 60.0: RE-EXAM
+     * - Grade < 20.0: RE-STUDY
      */
     public String getStatus() {
-        return (grade >= 60.0) ? "PASS" : "FAIL";
+        if (grade >= 60.0) {
+            return "PASS";
+        } else if (grade >= 20.0) {
+            return "RE-EXAM";
+        } else {
+            return "RE-STUDY";
+        }
     }
 
     // Polymorphism: concrete implementation of abstract method from Person
@@ -58,7 +68,7 @@ public class Student extends Person {
     // Polymorphism: concrete implementation of displayInfo
     @Override
     public void displayInfo() {
-        System.out.printf("| %-10s | %-22s | %7.2f | %-6s | %-6s |\n",
+        System.out.printf("| %-10s | %-22s | %7.2f | %-6s | %-9s |\n",
                 getId(), getName(), grade, getLetterGrade(), getStatus());
     }
 
